@@ -1,0 +1,5 @@
+# Use a basic web server image
+FROM nginx:alpine
+
+# Copy all project files into nginx folder
+COPY . /usr/share/nginx/html
