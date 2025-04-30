@@ -1,5 +1,8 @@
-# Use a basic web server image
-FROM nginx:alpine
+# Use official nginx image
+FROM nginx:latest
 
-# Copy all project files into nginx folder
+# Copy all HTML, CSS, JS to nginx folder
 COPY . /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
