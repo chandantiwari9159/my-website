@@ -1,11 +1,44 @@
 pipeline {
     agent any
+
+    environment {
+        IMAGE_NAME = 'chandantiwari9159/my-web-app'
+        TAG = 'latest'
+    }
+
     stages {
-        stage('Checkout') {
+        stage('Clone Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/chandantiwari9159/my-website.git'
+                git 'https://github.com/chandantiwari9159/devopsproject-Ecommerce-website.git'
             }
         }
-        // other stages...
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    dockerImage = docker.build("${IMAGE_NAME}:${TAG}")
+                }
+            }
+        }
+
+        stage('Push to DockerHub') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials-id') {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+
+        stage('Deploy Container') {
+            steps {
+                script {
+                    sh "docker stop myweb || true"
+                    sh "docker rm myweb || true"
+                    sh "docker run -d -p 8080:80 --name myweb ${IMAGE_NAME}:${TAG}"
+                }
+            }
+        }
     }
 }
