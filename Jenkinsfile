@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Clone Code') {
             steps {
-                git 'https://github.com/chandantiwari9159/devopsproject-Ecommerce-website.git'
+                git 'https://github.com/chandantiwari9159/my-website'
             }
         }
 
