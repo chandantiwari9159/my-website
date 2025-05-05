@@ -16,7 +16,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${jenkins/jenkins:lts-jdk17}:${TAG}")
+                    dockerImage = docker.build("${my-web-app:latest}:${TAG}")
                 }
             }
         }
