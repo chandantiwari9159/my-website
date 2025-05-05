@@ -36,7 +36,7 @@ pipeline {
                 script {
                     sh "docker stop myweb || true"
                     sh "docker rm myweb || true"
-                    sh "docker run -d -p 9191:8080 --name myweb ${IMAGE_NAME}:${TAG}"
+                    sh "docker run -d -p 8080:80 --name myweb ${IMAGE_NAME}:${TAG}"
                 }
             }
         }
