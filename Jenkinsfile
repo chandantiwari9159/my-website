@@ -9,14 +9,14 @@ pipeline {
     stages {
         stage('Clone Code') {
             steps {
-                git 'https://github.com/chandantiwari9159/devopsproject-Ecommerce-website.git'
+                git 'https://github.com/chandantiwari9159/my-website.git' 
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${IMAGE_NAME}:${TAG}")
+                    dockerImage = docker.build("${jenkins/jenkins:lts-jdk17}:${TAG}")
                 }
             }
         }
